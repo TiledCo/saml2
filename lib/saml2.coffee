@@ -242,8 +242,7 @@ decrypt_assertion = (dom, private_keys, cb) ->
 check_saml_signature = (xml, certificate) ->
   doc = (new xmldom.DOMParser()).parseFromString(xml)
 
-  # xpath failed to capture <ds:Signature> nodes of direct descendents of the root.
-  # Call documentElement to explicitly start from the root element of the document.
+  # Original xpath failed to capture nested <ds:Signature> tags
   signature = xmlcrypto.xpath(doc, "/*/*[local-name(.)='Signature' and namespace-uri(.)='http://www.w3.org/2000/09/xmldsig#']")
   return null unless signature.length is 1
   sig = new xmlcrypto.SignedXml()
