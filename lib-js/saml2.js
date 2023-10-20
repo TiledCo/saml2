@@ -686,6 +686,9 @@ parse_authn_response = function(saml_response, sp_private_keys, idp_certificates
         user = _.extend(user, {
           attributes: assertion_attributes
         });
+        console.log({
+          user: user
+        });
         return cb_wf(null, {
           user: user
         });

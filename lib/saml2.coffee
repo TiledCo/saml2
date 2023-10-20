@@ -496,6 +496,7 @@ parse_authn_response = (saml_response, sp_private_keys, idp_certificates, allow_
         assertion_attributes = parse_assertion_attributes validated_assertion
         user = _.extend user, pretty_assertion_attributes(assertion_attributes)
         user = _.extend user, attributes: assertion_attributes
+        console.log({user})
         cb_wf null, { user }
       catch err
         return cb_wf err
