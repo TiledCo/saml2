@@ -420,7 +420,9 @@ add_namespaces_to_child_assertions = (xml_string) ->
 # the attributes or an error if keys are incorrect or the response is invalid.
 parse_authn_response = (saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb) ->
   user = {}
-
+  console.log({
+    saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb
+  })
   async.waterfall [
     (cb_wf) ->
       # Decrypt the assertion
@@ -489,6 +491,7 @@ parse_authn_response = (saml_response, sp_private_keys, idp_certificates, allow_
       try
         session_info = get_session_info validated_assertion, require_session_index
         user.name_id = get_name_id validated_assertion
+        co
         user.session_index = session_info.index
         if session_info.not_on_or_after?
           user.session_not_on_or_after = session_info.not_on_or_after
