@@ -420,9 +420,16 @@ add_namespaces_to_child_assertions = (xml_string) ->
 # the attributes or an error if keys are incorrect or the response is invalid.
 parse_authn_response = (saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb) ->
   user = {}
-  console.log({
-    saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb
-  })
+    console.log('saml_response: ',saml_response)
+    console.log('sp_private_keys: ',sp_private_keys)
+    console.log('idp_certificates: ',idp_certificates)
+    console.log('allow_unencrypted: ',allow_unencrypted)
+    console.log('ignore_signature: ',ignore_signature)
+    console.log('require_session_index: ',require_session_index)
+    console.log('ignore_timing: ',ignore_timing)
+    console.log('notbefore_skew: ',notbefore_skew)
+    console.log('sp_audience: ',sp_audience)
+    console.log('cb: ',cb)
   async.waterfall [
     (cb_wf) ->
       # Decrypt the assertion
@@ -498,7 +505,7 @@ parse_authn_response = (saml_response, sp_private_keys, idp_certificates, allow_
         assertion_attributes = parse_assertion_attributes validated_assertion
         user = _.extend user, pretty_assertion_attributes(assertion_attributes)
         user = _.extend user, attributes: assertion_attributes
-        console.log({user})
+        console.log('user',user)
         cb_wf null, { user }
       catch err
         return cb_wf err
