@@ -582,6 +582,18 @@ add_namespaces_to_child_assertions = function(xml_string) {
 parse_authn_response = function(saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb) {
   var user;
   user = {};
+  console.log({
+    saml_response: saml_response,
+    sp_private_keys: sp_private_keys,
+    idp_certificates: idp_certificates,
+    allow_unencrypted: allow_unencrypted,
+    ignore_signature: ignore_signature,
+    require_session_index: require_session_index,
+    ignore_timing: ignore_timing,
+    notbefore_skew: notbefore_skew,
+    sp_audience: sp_audience,
+    cb: cb
+  });
   return async.waterfall([
     function(cb_wf) {
       return decrypt_assertion(saml_response, sp_private_keys, function(err, result) {
