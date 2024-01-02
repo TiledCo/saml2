@@ -582,18 +582,16 @@ add_namespaces_to_child_assertions = function(xml_string) {
 parse_authn_response = function(saml_response, sp_private_keys, idp_certificates, allow_unencrypted, ignore_signature, require_session_index, ignore_timing, notbefore_skew, sp_audience, cb) {
   var user;
   user = {};
-  console.log({
-    saml_response: saml_response,
-    sp_private_keys: sp_private_keys,
-    idp_certificates: idp_certificates,
-    allow_unencrypted: allow_unencrypted,
-    ignore_signature: ignore_signature,
-    require_session_index: require_session_index,
-    ignore_timing: ignore_timing,
-    notbefore_skew: notbefore_skew,
-    sp_audience: sp_audience,
-    cb: cb
-  });
+  console.log('saml_response: ', saml_response);
+  console.log('sp_private_keys: ', sp_private_keys);
+  console.log('idp_certificates: ', idp_certificates);
+  console.log('allow_unencrypted: ', allow_unencrypted);
+  console.log('ignore_signature: ', ignore_signature);
+  console.log('require_session_index: ', require_session_index);
+  console.log('ignore_timing: ', ignore_timing);
+  console.log('notbefore_skew: ', notbefore_skew);
+  console.log('sp_audience: ', sp_audience);
+  console.log('cb: ', cb);
   return async.waterfall([
     function(cb_wf) {
       return decrypt_assertion(saml_response, sp_private_keys, function(err, result) {
@@ -698,9 +696,7 @@ parse_authn_response = function(saml_response, sp_private_keys, idp_certificates
         user = _.extend(user, {
           attributes: assertion_attributes
         });
-        console.log({
-          user: user
-        });
+        console.log('user', user);
         return cb_wf(null, {
           user: user
         });
